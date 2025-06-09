@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Razorpay Checkout</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<h3>Redirecting to Razorpay payment...</h3>
+
+<script>
+
+    function getParam(name) {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name);
+    }
+
+    const amount = getParam("amount");
+    const currency = getParam("currency");
+    const orderId = getParam("orderId");
+
+    const options = {
+        "key": "rzp_test_fxT02rKvELdAeu",
+        "amount": amount,
+        "currency": currency,
+        "name": "Flight Booking",
+        "description": "Booking Payment",
+        "order_id": orderId,
+         handler: function (response) {
+            const paymentId = response.razorpay_payment_id;
+            window.location.href = "/payment/success.html?paymentId=" + paymentId;
+        },
+        "prefill": {
+            "name": "Auto User",
+            "email": "test@example.com",
+            "contact": "9999999999"
+        },
+        "theme": {
+            "color": "#528FF0"
+        }
+    };
+
+    const rzp = new Razorpay(options);
+
+    window.onload = function () {
+        rzp.open();
+    };
+</script>
+</body>
+</html>

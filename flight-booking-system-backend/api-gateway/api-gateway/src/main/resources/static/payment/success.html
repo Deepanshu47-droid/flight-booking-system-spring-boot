@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f9ff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .success-container {
+            background-color: #e6f7e6;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #28a745;
+        }
+
+        p {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .payment-id {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .link {
+            margin-top: 20px;
+            display: block;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="success-container">
+    <h2>Payment Successful!</h2>
+    <p>Your payment ID is:</p>
+    <p class="payment-id" id="paymentId"></p>
+    <p>Go to the <a class="link" href="/booking-page.html">booking page</a> to confirm your booking.</p>
+</div>
+
+<script>
+    // Get the payment ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const paymentId = urlParams.get('paymentId');
+
+    // Show it on the page
+    document.getElementById("paymentId").textContent = paymentId || "N/A";
+</script>
+</body>
+</html>
